@@ -6,22 +6,33 @@ import "../Styles/Nav.css";
 class Nav extends React.Component {
   /*temporary state - will be fetched from API later*/
   state = {
-    categories: []
+    categories: [
+      {
+        _id: "kh2b3423",
+        name: "Western",
+        color: "DD3C3E"
+      },
+      {
+        _id: "kh245j45",
+        name: "Healthy",
+        color: "40C9A2"
+      }
+    ]
   };
 
-  // Api Request
-  componentWillMount() {
-    // Getting all categories for the Nav
-    Axios.get(`${process.env.REACT_APP_API}/categories`)
-      .then(res => {
-        this.setState({
-          categories: res.data
-        });
-      })
-      .catch(err => {
-        console.log({ err });
-      });
-  }
+  // // Api Request
+  // componentWillMount() {
+  //   // Getting all categories for the Nav
+  //   Axios.get(`${process.env.REACT_APP_API}/categories`)
+  //     .then(res => {
+  //       this.setState({
+  //         categories: res.data
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log({ err });
+  //     });
+  // }
 
   render() {
     return (
@@ -41,6 +52,7 @@ class Nav extends React.Component {
                 style={{ color: `#${cat.color}` }}
                 key={cat._id}
                 value={cat.name}
+                onClick={e => this.props.filter(e)}
               >
                 {cat.name}
               </span>
@@ -56,11 +68,12 @@ class Nav extends React.Component {
           </select>
         </div>
         {/*Search*/}
-        <div className="search">
+        <div>
           <input
             type="text"
             placeholder="Search..."
-            onChange={e => this.props.search()}
+            className="search"
+            onChange={e => this.props.search(e)}
           />
         </div>
       </nav>
