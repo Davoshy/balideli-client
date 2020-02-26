@@ -12,8 +12,10 @@ class Restaurants extends React.Component {
   state = {
     restaurants: [],
     originalRests: [],
+
     categories: [],
     filters: []
+
   };
 
   //Api Request
@@ -29,6 +31,7 @@ class Restaurants extends React.Component {
       .catch(err => {
         console.log({ err });
       });
+    console.log(this.state.restaurants);
   }
 
   search = e => {

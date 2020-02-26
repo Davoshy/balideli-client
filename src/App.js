@@ -3,12 +3,14 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Nav from "./Components/Nav";
 import Restaurants from "./Components/Restaurants";
+import Restaurant from "./Components/Restaurant";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" component={Restaurants} />
+        <Route path="/restaurants" component={Restaurant} />
       </Switch>
     </BrowserRouter>
   );
