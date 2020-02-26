@@ -1,6 +1,15 @@
 .card {
+  padding: 5px;
   background-color: grey;
   height: 250px;
   border-radius: 10px;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  background-color: #02c7b9;
+  border-radius: 5px;
+  height: 150px;
+  background-position: center;
+  background-size: cover;
 }
