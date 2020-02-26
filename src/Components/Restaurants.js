@@ -1,5 +1,7 @@
 import React from "react";
 import Nav from "./Nav";
+import Card from "./Card";
+import "../Styles/restaurants.css";
 
 class Restaurants extends React.Component {
   render() {
@@ -7,7 +9,9 @@ class Restaurants extends React.Component {
       <>
         <Nav />
         <div className="restaurants">
-          <p>The listings go here in a grid</p>
+          {[...Array(7)].map((e, i) => (
+            <Card key={i} />
+          ))}
         </div>
       </>
     );
