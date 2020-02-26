@@ -1,8 +1,8 @@
+import Axios from "axios";
 import React from "react";
 import "../Styles/Nav.css";
 
 class Nav extends React.Component {
-
   state = {
     categories: [
       {
@@ -31,7 +31,6 @@ class Nav extends React.Component {
         console.log({ err });
       });
   }
-
 
   render() {
     return (
