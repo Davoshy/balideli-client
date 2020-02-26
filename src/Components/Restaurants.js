@@ -9,6 +9,12 @@ import Card from "./Card";
 import "../Styles/restaurants.css";
 
 class Restaurants extends React.Component {
+
+  state = {
+    restaurants: [],
+    categories: []
+  };
+
   // Api Request
   componentWillMount() {
     // Getting all restaurants for the thumpnails
@@ -23,13 +29,14 @@ class Restaurants extends React.Component {
       });
   }
 
+
   render() {
     return (
       <>
         <Nav />
         <div className="restaurants">
-          {[...Array(7)].map((e, i) => (
-            <Card key={i} />
+          {this.state.restaurants.map(rest => (
+            <Card rest={rest} key={rest._id} />
           ))}
         </div>
       </>

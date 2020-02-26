@@ -2,6 +2,22 @@ import React from "react";
 import "../Styles/Nav.css";
 
 class Nav extends React.Component {
+
+  state = {
+    categories: [
+      {
+        id: "kh2b3423",
+        name: "Western",
+        color: "DD3C3E"
+      },
+      {
+        id: "kh245j45",
+        name: "Healthy",
+        color: "40C9A2"
+      }
+    ]
+  };
+
   // Api Request
   componentWillMount() {
     // Getting all categories for the Nav
@@ -16,12 +32,27 @@ class Nav extends React.Component {
       });
   }
 
+
   render() {
     return (
       <nav>
         <div className="logo"></div>
         <div className="categories">
-          <button>Healthy</button>
+          {this.state.categories.map(cat => (
+            <a
+              className="cat-button"
+              href="/"
+              style={{ borderColor: `#${cat.color}` }}
+            >
+              <span
+                style={{ color: `#${cat.color}` }}
+                key={cat._id}
+                value={cat.name}
+              >
+                {cat.name}
+              </span>
+            </a>
+          ))}
         </div>
         <div className="filter">
           <select placeholder="Sort by...">

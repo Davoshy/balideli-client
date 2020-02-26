@@ -17,3 +17,15 @@ nav > .logo {
   background-size: contain;
   background-position: left;
 }
+
+.cat-button {
+  font-size: 14px;
+  margin-right: 4px;
+  padding: 10px 10px 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  border: 1px solid;
+  border-radius: 4px;
+}
