@@ -1,9 +1,51 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "../Styles/restaurant.css";
+import Axios from "axios";
 
 class Restaurant extends React.Component {
-  state = {};
+  state = {
+    restaurant: {},
+    meals: [],
+    categories: []
+  };
+
+  // Api Request
+  componentWillMount() {
+    // Getting single restaurant
+    Axios.get(`${process.env.REACT_APP_API}/restaurants/:id`)
+      .then(res => {
+        this.setState({
+          restaurant: res.data
+        });
+      })
+      .catch(err => {
+        console.log({ err });
+      });
+
+    // Getting all meals
+    Axios.get(`${process.env.REACT_APP_API}/meals`)
+      .then(res => {
+        this.setState({
+          meals: res.data
+        });
+      })
+      .catch(err => {
+        console.log({ err });
+      });
+
+    // Getting categories
+    Axios.get(`${process.env.REACT_APP_API}/categories`)
+      .then(res => {
+        this.setState({
+          categories: res.data
+        });
+      })
+      .catch(err => {
+        console.log({ err });
+      });
+  }
+
   render() {
     return (
       <>
