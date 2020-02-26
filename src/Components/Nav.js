@@ -4,18 +4,7 @@ import "../Styles/Nav.css";
 
 class Nav extends React.Component {
   state = {
-    categories: [
-      {
-        id: "kh2b3423",
-        name: "Western",
-        color: "DD3C3E"
-      },
-      {
-        id: "kh245j45",
-        name: "Healthy",
-        color: "40C9A2"
-      }
-    ]
+    categories: []
   };
 
   // Api Request
@@ -61,7 +50,11 @@ class Nav extends React.Component {
           </select>
         </div>
         <div className="search">
-          <input type="text" placeholder="Search..." />
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={e => this.props.search()}
+          />
         </div>
       </nav>
     );
