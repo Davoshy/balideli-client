@@ -4,29 +4,24 @@ import "../Styles/card.css";
 import { Link } from "react-router-dom";
 
 class Cards extends React.Component {
-  state = {
-    rest: this.props.rest
-  };
-
   render() {
     return (
-      <Link className="card" to={`/restaurants/${this.state.rest._id}`}>
+      <Link className="card" to={`/restaurants/${this.props.rest._id}`}>
         <div
           className="image"
-          style={{ background: `url(${this.state.rest.image})` }}
+          style={{ background: `url(${this.props.rest.image})` }}
         ></div>
         <div className="content">
-          <h2 className="restaurant-name">{this.state.rest.name}</h2>
+          <h2 className="restaurant-name">{this.props.rest.name}</h2>
           <ul className="categories">
-            {this.state.rest.categories.map(category => (
-              <li key={category._id}>category._id</li>
+            {this.props.rest.category.map((cat, i) => (
+              <li key={i}>{cat}</li>
             ))}
           </ul>
           <div className="info">
-            <span className="price">{this.state.rest.likes}</span> /* need to
-            update with avg.price calc */
-            <span className="likes">{this.state.rest.likes}</span>
-            <span className="time">{this.state.rest.deliveryTime}</span>
+            <span className="price"></span>
+            <span className="likes">{this.props.rest.likes}</span>
+            <span className="time">{this.props.rest.deliveryTime}min</span>
           </div>
         </div>
       </Link>

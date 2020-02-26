@@ -1,8 +1,10 @@
+/*importing components and packages*/
 import Axios from "axios";
 import React from "react";
 import "../Styles/Nav.css";
 
 class Nav extends React.Component {
+  /*temporary state - will be fetched from API later*/
   state = {
     categories: []
   };
@@ -24,10 +26,13 @@ class Nav extends React.Component {
   render() {
     return (
       <nav>
+        {/*Logo*/}
         <div className="logo"></div>
+        {/*Categories*/}
         <div className="categories">
           {this.state.categories.map(cat => (
             <a
+              key={cat._id}
               className="cat-button"
               href="/"
               style={{ borderColor: `#${cat.color}` }}
@@ -42,6 +47,7 @@ class Nav extends React.Component {
             </a>
           ))}
         </div>
+        {/*Filter*/}
         <div className="filter">
           <select placeholder="Sort by...">
             <option value="price">Price</option>
@@ -49,6 +55,7 @@ class Nav extends React.Component {
             <option value="likes">Likes</option>
           </select>
         </div>
+        {/*Search*/}
         <div className="search">
           <input
             type="text"
