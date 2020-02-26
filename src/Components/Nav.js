@@ -1,7 +1,6 @@
 import Axios from "axios";
 import React from "react";
 import "../Styles/Nav.css";
-import Axios from "axios";
 
 class Nav extends React.Component {
   state = {
