@@ -10,11 +10,9 @@ import "../Styles/restaurants.css";
 
 class Restaurants extends React.Component {
   state = {
-
     restaurants: [],
     originalRests: [],
     categories: []
-
   };
 
   //Api Request
@@ -30,6 +28,7 @@ class Restaurants extends React.Component {
       .catch(err => {
         console.log({ err });
       });
+    console.log(this.state.restaurants);
   }
 
   search = e => {
