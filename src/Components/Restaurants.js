@@ -21,16 +21,6 @@ class Restaurants extends React.Component {
       .catch(err => {
         console.log({ err });
       });
-    // Getting all categories for the Nav
-    Axios.get(`${process.env.REACT_APP_API}/categories`)
-      .then(res => {
-        this.setState({
-          categories: res.data
-        });
-      })
-      .catch(err => {
-        console.log({ err });
-      });
   }
 
   render() {
