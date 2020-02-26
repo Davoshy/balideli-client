@@ -13,8 +13,11 @@ class Restaurant extends React.Component {
   // Api Request
   componentWillMount() {
     // Getting single restaurant
-    Axios.get(`${process.env.REACT_APP_API}/restaurants/:id`)
+    Axios.get(
+      `${process.env.REACT_APP_API}/restaurants/${this.props.match.params.id}`
+    )
       .then(res => {
+        console.log(res.data);
         this.setState({
           restaurant: res.data
         });
@@ -53,18 +56,16 @@ class Restaurant extends React.Component {
           <div>
             <h1>Peloton</h1>
             <div id="gallery">
-              <div
-                class="photo"
-                style="background-image: url('https://bit.ly/2RXsprv')"
-              ></div>
-              <div
-                class="photo"
-                style="background-image: url('https://bit.ly/2O622yD')"
-              ></div>
-              <div
-                class="photo"
-                style="background-image: url('https://bit.ly/38FaBbs')"
-              ></div>
+              {[...Array(4)].map((image, index) => {
+                return (
+                  <div
+                    class="photo"
+                    style={{
+                      backgroundImage: `url(${this.state.images[index]})`
+                    }}
+                  ></div>
+                );
+              })}
               <div
                 class="photo"
                 style="background-image: url('https://bit.ly/2RATsdq')"
