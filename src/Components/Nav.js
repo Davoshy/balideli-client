@@ -57,7 +57,11 @@ class Nav extends React.Component {
         </div>
         {/*Search*/}
         <div className="search">
-          <input type="text" placeholder="Search..." />
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={e => this.props.search()}
+          />
         </div>
       </nav>
     );
