@@ -10,11 +10,10 @@ import "../Styles/restaurants.css";
 
 class Restaurants extends React.Component {
   state = {
-
     restaurants: [],
     originalRests: [],
-    categories: []
-
+    categories: [],
+    filters: []
   };
 
   //Api Request
@@ -35,18 +34,19 @@ class Restaurants extends React.Component {
   search = e => {
     let input = e.target.value;
     let sortedRests = this.state.originalRests.filter(rest => {
-      return (
-        rest.name.toLowerCase().includes(input) ||
-        rest.category.toLowerCase().includes(input)
-      );
+      return rest.name.toLowerCase().includes(input);
     });
     this.setState({ restaurants: sortedRests });
+  };
+
+  filter = e => {
+    console.log(e.target.value);
   };
 
   render() {
     return (
       <>
-        <Nav search={this.search} />
+        <Nav search={this.search} filter={this.filter} />
         <div className="restaurants">
           {this.state.restaurants.map(rest => (
             <Card rest={rest} key={rest._id} />
