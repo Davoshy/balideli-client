@@ -9,13 +9,11 @@ import Card from "./Card";
 import "../Styles/restaurants.css";
 
 class Restaurants extends React.Component {
-
   state = {
-    restaurants: [],
-    categories: []
+    restaurants: []
   };
 
-  // Api Request
+  //Api Request
   componentWillMount() {
     // Getting all restaurants for the thumpnails
     Axios.get(`${process.env.REACT_APP_API}/restaurants`)
@@ -28,7 +26,6 @@ class Restaurants extends React.Component {
         console.log({ err });
       });
   }
-
 
   render() {
     return (

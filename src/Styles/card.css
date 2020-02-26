@@ -13,3 +13,7 @@
   background-position: center;
   background-size: cover;
 }
+
+.info > span {
+  margin: 0px 10px;
+}
