@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../Styles/restaurant.css";
 import Axios from "axios";
+//Components
 import Menu from "./Menu";
+import Basket from "./Basket";
 
 class Restaurant extends React.Component {
   state = {
@@ -14,7 +16,8 @@ class Restaurant extends React.Component {
       likes: 0
     },
     meals: [],
-    avgPrice: 0
+    avgPrice: 0,
+    basketMeal: {}
   };
 
   // Api Request
@@ -72,6 +75,12 @@ class Restaurant extends React.Component {
   unique = (value, index, self) => {
     return self.indexOf(value) === index;
   };
+  addToBasket = meal => {
+    console.log(meal);
+    this.setState({
+      basketMeal: meal
+    });
+  };
 
   render() {
     return (
@@ -120,8 +129,13 @@ class Restaurant extends React.Component {
             </div>
           </div>
           {/* Menu Component*/}
-          <Menu meals={this.state.meals} unique={this.unique} />
+          <Menu
+            meals={this.state.meals}
+            unique={this.unique}
+            adding={this.addToBasket}
+          />
           {/* Basket Component*/}
+          <Basket meal={this.state.basketMeal} />
         </div>
       </>
     );

@@ -15,7 +15,6 @@ class Menu extends React.Component {
     for (let i = 0; i < uniqueGroups.length; i++) {
       arrayFull.push(mealArr.filter(meal => meal.group == uniqueGroups[i]));
     }
-    console.log(arrayFull);
     this.setState({
       groups: uniqueGroups,
       mealArray: arrayFull
@@ -37,7 +36,13 @@ class Menu extends React.Component {
                       <li key={i}>
                         <span className="name">{meal.name}</span>
                         <span className="price">
-                          {meal.price} IDR<i className="fas fa-plus"></i>
+                          {meal.price} IDR
+                          <i
+                            onClick={e => this.props.adding(meal)}
+                            className="fas fa-plus"
+                          >
+                            +
+                          </i>
                         </span>
                       </li>
                     );
