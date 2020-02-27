@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../Styles/restaurant.css";
 import Axios from "axios";
+import Menu from "./Menu";
 
 class Restaurant extends React.Component {
   state = {
@@ -68,6 +69,9 @@ class Restaurant extends React.Component {
       avgPrice: Math.floor(avg)
     });
   }
+  unique = (value, index, self) => {
+    return self.indexOf(value) === index;
+  };
 
   render() {
     return (
@@ -116,6 +120,7 @@ class Restaurant extends React.Component {
             </div>
           </div>
           {/* Menu Component*/}
+          <Menu meals={this.state.meals} unique={this.unique} />
           {/* Basket Component*/}
         </div>
       </>
