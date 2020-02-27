@@ -5,9 +5,15 @@ import Axios from "axios";
 
 class Restaurant extends React.Component {
   state = {
-    restaurant: {},
+    restaurant: {
+      name: "",
+      images: [],
+      category: [],
+      deliveryTime: 30,
+      likes: 0
+    },
     meals: [],
-    categories: []
+    avgPrice: 0
   };
 
   // Api Request
@@ -17,18 +23,19 @@ class Restaurant extends React.Component {
       `${process.env.REACT_APP_API}/restaurants/${this.props.match.params.id}`
     )
       .then(res => {
-        console.log(res.data);
+        console.log(res.data.category);
         this.setState({
           restaurant: res.data
         });
       })
       .catch(err => {
-        console.log({ err });
+        console.log(err);
       });
 
     // Getting all meals
     Axios.get(`${process.env.REACT_APP_API}/meals`)
       .then(res => {
+        console.log(res.data);
         this.setState({
           meals: res.data
         });
@@ -48,44 +55,69 @@ class Restaurant extends React.Component {
         console.log({ err });
       });
   }
+  componenDidMount() {
+    this.calcPrice();
+  }
+
+  calcPrice = () => {
+    let items = this.state.meals.length;
+    let itemPrices = items.map(item => {
+      return item.price;
+    });
+    let sum = itemPrices.reduce((a, b) => a + b);
+    this.setState({
+      avgPrice: sum / items
+    });
+  };
 
   render() {
     return (
       <>
         <div id="restaurant">
           <div>
-            <h1>Peloton</h1>
+            <h1>{this.state.restaurant.name}</h1>
             <div id="gallery">
-              {[...Array(4)].map((image, index) => {
-                return (
-                  <div
-                    class="photo"
-                    style={{
-                      backgroundImage: `url(${this.state.images[index]})`
-                    }}
-                  ></div>
-                );
-              })}
-              <div
-                class="photo"
-                style="background-image: url('https://bit.ly/2RATsdq')"
-              ></div>
+              {[...Array(this.state.restaurant.images.length)].map(
+                (image, i) => {
+                  return (
+                    <div
+                      key={i}
+                      className="photo"
+                      style={{
+                        backgroundImage: `url(${this.state.restaurant.images[i]})`
+                      }}
+                    ></div>
+                  );
+                }
+              )}
+              <ul className="categories">
+                {this.state.restaurant.category.map(category => {
+                  return (
+                    <li
+                      key={category._id}
+                      style={{ backgroundColor: category.color }}
+                    >
+                      {category.name}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
-            <ul class="categories"></ul> //categories component goes here
-            <div class="info">
-              <span class="price">
-                <i class="fas fa-dollar-sign"></i>20
+            <div className="info">
+              <span className="price">
+                <i className="fas fa-dollar-sign"></i>
+                {this.state.avgPrice}
               </span>
-              <span class="likes">
-                <i class="fas fa-thumbs-up"></i>347
+              <span className="likes">
+                <i className="fas fa-thumbs-up"></i>347
               </span>
-              <span class="time">
-                <i class="fas fa-clock"></i>20 min
+              <span className="time">
+                <i className="fas fa-clock"></i>20 min
               </span>
             </div>
           </div>
-          <div id="meals"></div> //meals component goes here
-          <div id="basket"></div> //basket component goes here
+          {/* Menu Component*/}
+          {/* Basket Component*/}
         </div>
       </>
     );

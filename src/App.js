@@ -9,8 +9,8 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/restaurants/:id" component={Restaurant} />
         <Route path="/" component={Restaurants} />
-        <Route path="/restaurants" component={Restaurant} />
       </Switch>
     </BrowserRouter>
   );
