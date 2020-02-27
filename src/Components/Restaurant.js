@@ -23,7 +23,6 @@ class Restaurant extends React.Component {
       `${process.env.REACT_APP_API}/restaurants/${this.props.match.params.id}`
     )
       .then(res => {
-        console.log(res.data.category);
         this.setState({
           restaurant: res.data
         });
@@ -35,10 +34,12 @@ class Restaurant extends React.Component {
     // Getting all meals
     Axios.get(`${process.env.REACT_APP_API}/meals`)
       .then(res => {
-        console.log(res.data);
-        this.setState({
-          meals: res.data
-        });
+        this.setState(
+          {
+            meals: res.data
+          },
+          () => this.calcPrice()
+        );
       })
       .catch(err => {
         console.log({ err });
@@ -55,20 +56,18 @@ class Restaurant extends React.Component {
         console.log({ err });
       });
   }
-  componenDidMount() {
-    this.calcPrice();
-  }
-
-  calcPrice = () => {
-    let items = this.state.meals.length;
+  calcPrice() {
+    let items = this.state.meals;
+    let avg = 0;
     let itemPrices = items.map(item => {
       return item.price;
     });
     let sum = itemPrices.reduce((a, b) => a + b);
+    avg = sum / items.length;
     this.setState({
-      avgPrice: sum / items
+      avgPrice: Math.floor(avg)
     });
-  };
+  }
 
   render() {
     return (
