@@ -76,7 +76,6 @@ class Restaurant extends React.Component {
     return self.indexOf(value) === index;
   };
   addToBasket = meal => {
-    console.log(meal);
     this.setState({
       basketMeal: meal
     });
