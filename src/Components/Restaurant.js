@@ -36,8 +36,11 @@ class Restaurant extends React.Component {
       });
 
     // Getting all meals
-    Axios.get(`${process.env.REACT_APP_API}/meals`)
+    Axios.get(
+      `${process.env.REACT_APP_API}/meals/${this.props.match.params.id}`
+    )
       .then(res => {
+        console.log(res.data);
         this.setState(
           {
             meals: res.data

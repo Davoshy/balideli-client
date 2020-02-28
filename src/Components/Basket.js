@@ -21,7 +21,12 @@ class Basket extends React.Component {
     }
   }
   deleteItem(e) {
-    let newItemList = this.state.itemList.filter(meal => meal != e);
+    let index = this.state.itemList.indexOf(e);
+    console.log(this.state.itemList.length);
+    console.log(index);
+    let newItemList = this.state.itemList;
+    newItemList.splice(index, 1);
+    console.log(newItemList);
     this.setState({
       itemList: newItemList,
       total: this.state.total - e.price
