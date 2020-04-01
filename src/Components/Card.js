@@ -1,30 +1,70 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../Styles/card.css";
+import "../Styles/styles.css";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 class Cards extends React.Component {
+  state = {
+    name: "",
+    category: [],
+    images: [],
+    meals: [],
+    price: 0,
+    likes: 0,
+    deliveryTime: 30
+  };
+
+  componentDidMount() {
+    let r = this.props.restaurant;
+    let rmeals = this.props.meals;
+    let avgPrice = this.props.avgPrice;
+    console.log(avgPrice);
+    // Getting restaurant meals
+    this.setState({
+      name: r.name,
+      category: r.category,
+      images: r.images,
+      deliveryTime: r.deliveryTime,
+      likes: r.likes,
+      price: avgPrice
+    });
+  }
+
   render() {
     return (
-      <Link className="card" to={`/restaurants/${this.props.rest._id}`}>
+      <a
+        href={`restaurants/${this.props.restaurant._id}`}
+        className="restaurant"
+      >
         <div
-          className="image"
-          style={{ background: `url(${this.props.rest.image})` }}
+          className="photo"
+          style={{ backgroundImage: `url(${this.state.images[0]})` }}
         ></div>
-        <div className="content">
-          <h2 className="restaurant-name">{this.props.rest.name}</h2>
-          <ul className="categories">
-            {this.props.rest.category.map((cat, i) => (
-              <li key={i}>{cat}</li>
-            ))}
-          </ul>
-          <div className="info">
-            <span className="price"></span>
-            <span className="likes">{this.props.rest.likes}</span>
-            <span className="time">{this.props.rest.deliveryTime}min</span>
-          </div>
+        <h3>{this.state.name}</h3>
+        <ul className="categories">
+          {this.state.category.map((c, i) => {
+            return (
+              <li key={i} style={{ backgroundColor: c.color }}>
+                {c.name}
+              </li>
+            );
+          })}
+        </ul>
+        <div className="info">
+          <span className="price">
+            <i className="fas fa-dollar-sign"></i> {this.state.price}
+          </span>
+          <span className="likes">
+            <i className="fas fa-thumbs-up"></i>
+            {this.state.likes}
+          </span>
+          <span className="time">
+            <i className="fas fa-clock"></i>
+            {this.state.deliveryTime} min
+          </span>
         </div>
-      </Link>
+      </a>
     );
   }
 }

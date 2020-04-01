@@ -22,11 +22,8 @@ class Basket extends React.Component {
   }
   deleteItem(e) {
     let index = this.state.itemList.indexOf(e);
-    console.log(this.state.itemList.length);
-    console.log(index);
     let newItemList = this.state.itemList;
     newItemList.splice(index, 1);
-    console.log(newItemList);
     this.setState({
       itemList: newItemList,
       total: this.state.total - e.price
@@ -44,10 +41,7 @@ class Basket extends React.Component {
                 <i
                   onClick={e => this.deleteItem(item)}
                   className="fas fa-minus"
-                >
-                  {" "}
-                  -{" "}
-                </i>
+                ></i>
                 <span className="name">{item.name}</span>
                 <span className="price">{item.price} IDR</span>
               </li>

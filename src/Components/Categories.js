@@ -1,23 +1,13 @@
 import React from "react";
-import axios from "axios";
-
-// Components
 import Nav from "./Nav";
 import Card from "./Card";
 
-// Styles
-import "../Styles/styles.css";
-
-class Restaurants extends React.Component {
+class Categories extends React.Component {
   state = {
     restaurants: [],
-    categories: [],
-    allMeals: []
+    categories: []
   };
-
-  //Api Request
-  componentWillMount() {
-    // Getting all restaurants for the thumbnails
+  componentDidMount() {
     axios.get(`${process.env.REACT_APP_API}/restaurants`).then(restaurants => {
       this.setState({
         restaurants: restaurants.data
@@ -28,13 +18,7 @@ class Restaurants extends React.Component {
         categories: categories.data
       });
     });
-    axios.get(`${process.env.REACT_APP_API}/meals`).then(meals => {
-      this.setState({
-        allMeals: meals.data
-      });
-    });
   }
-
   render() {
     return (
       <>
@@ -63,4 +47,4 @@ class Restaurants extends React.Component {
   }
 }
 
-export default Restaurants;
+export default Categories;

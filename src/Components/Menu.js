@@ -40,9 +40,7 @@ class Menu extends React.Component {
                           <i
                             onClick={e => this.props.adding(meal)}
                             className="fas fa-plus"
-                          >
-                            +
-                          </i>
+                          ></i>
                         </span>
                       </li>
                     );

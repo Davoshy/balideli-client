@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../Styles/restaurant.css";
+import "../Styles/styles.css";
 import Axios from "axios";
 //Components
 import Menu from "./Menu";
 import Basket from "./Basket";
+import Nav from "./Nav";
 
 class Restaurant extends React.Component {
   state = {
@@ -35,12 +36,11 @@ class Restaurant extends React.Component {
         console.log(err);
       });
 
-    // Getting all meals
+    // Getting restaurant meals
     Axios.get(
       `${process.env.REACT_APP_API}/meals/${this.props.match.params.id}`
     )
       .then(res => {
-        console.log(res.data);
         this.setState(
           {
             meals: res.data
@@ -71,9 +71,12 @@ class Restaurant extends React.Component {
     });
     let sum = itemPrices.reduce((a, b) => a + b);
     avg = sum / items.length;
-    this.setState({
-      avgPrice: Math.floor(avg)
-    });
+    this.setState(
+      {
+        avgPrice: Math.floor(avg)
+      },
+      () => this.props.avg(avg)
+    );
   }
   unique = (value, index, self) => {
     return self.indexOf(value) === index;
@@ -118,15 +121,14 @@ class Restaurant extends React.Component {
               </ul>
             </div>
             <div className="info">
-              <span className="price">
-                <i className="fas fa-dollar-sign"></i>
-                {this.state.avgPrice}
-              </span>
+              <span className="price">IDR {this.state.avgPrice}</span>
               <span className="likes">
-                <i className="fas fa-thumbs-up"></i>347
+                <i className="fas fa-thumbs-up"></i>{" "}
+                {this.state.restaurant.likes}
               </span>
               <span className="time">
-                <i className="fas fa-clock"></i>20 min
+                <i className="fas fa-clock"></i>
+                {this.state.restaurant.deliveryTime} min
               </span>
             </div>
           </div>
